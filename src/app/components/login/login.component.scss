@@ -1,0 +1,41 @@
+:host {
+  margin: 0 auto;
+  * {
+    text-align: center;
+  }
+}
+
+.user-selection {
+  width: 400px;
+  min-width: 300px;
+  margin: 0 auto;
+}
+
+.user-item {
+  display: flex;
+  cursor: pointer;
+}
+
+.user-btn {
+  margin-right: 10px;
+  margin-left: auto;
+
+  button {
+    margin: 0 4px;
+  }
+}
+
+.register-form {
+  padding-top: 10px;
+  min-width: 288px;
+
+  button {
+    vertical-align: inherit;
+  }
+}
+
+@media only screen and (max-width: 430px) {
+  .user-selection {
+    width: 100%;
+  }
+}

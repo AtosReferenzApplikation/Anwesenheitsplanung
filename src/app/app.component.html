@@ -1,0 +1,58 @@
+<nb-layout>
+
+  <nb-layout-header fixed *ngIf="!router.url.includes('login')">
+    <h3 class="title">Anwesenheitsplanung</h3>
+    <button nbButton status="success" size="small" style="margin-left: auto;" (click)="logout()">
+      Logout<nb-icon icon="log-out-outline"></nb-icon>
+    </button>
+  </nb-layout-header>
+
+  <nb-layout-column>
+
+    <style>
+      html {
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+        font-size: 14px;
+        color: #333;
+        box-sizing: border-box;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+      }
+
+      nb-layout-column {
+        background-color: white;
+      }
+
+      h1,
+      h2,
+      h3,
+      h4,
+      h5,
+      h6 {
+        margin: 8px 0;
+      }
+
+      p {
+        margin: 0;
+      }
+
+      .title {
+        text-overflow: ellipsis;
+        overflow: hidden;
+        white-space: nowrap;
+      }
+
+      .logout-btn {
+        margin-left: auto;
+      }
+    </style>
+    <div class="content" role="main">
+      <router-outlet></router-outlet>
+    </div>
+  </nb-layout-column>
+
+  <!-- <nb-layout-footer fixed>
+
+  </nb-layout-footer> -->
+
+</nb-layout>

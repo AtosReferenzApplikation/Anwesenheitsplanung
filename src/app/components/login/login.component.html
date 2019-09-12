@@ -1,0 +1,30 @@
+<h1 id="title" class="title">Login</h1>
+<p class="sub-title">Log dich ein mit einem Klick auf deinen Namen.</p>
+
+<div class="user-selection">
+  <nb-card size="small" [nbSpinner]="loading" nbSpinnerStatus="primary" nbSpinnerSize="large">
+    <nb-list>
+      <nb-list-item *ngFor="let user of users" class="user-item" (click)="login(user)">
+        <nb-user [name]="user.name"></nb-user>
+        <div *ngIf="user.name.toLowerCase() !== 'gast'" class="user-btn">
+          <button nbButton size="tiny" status="info" (click)="$event.preventDefault(); $event.stopPropagation(); openEditDialog(user)">
+            <nb-icon icon="edit-2-outline"></nb-icon>
+          </button>
+          <button nbButton size="tiny" status="info" (click)="$event.preventDefault(); $event.stopPropagation(); deleteUser(user)">
+            <nb-icon icon="trash-2-outline"></nb-icon>
+          </button>
+        </div>
+      </nb-list-item>
+    </nb-list>
+  </nb-card>
+</div>
+
+<section class="another-action" aria-label="Register">
+  Du bist nicht in der Liste? <b>Melde dich an:</b>
+  <div class="register-form">
+    <input #nameInput type="text" nbInput placeholder="Name" style="margin-right: 8px">
+    <button nbButton (click)="newUser(nameInput.value)" shape="round" size="tiny">
+      <nb-icon icon="checkmark-circle-outline"></nb-icon>
+    </button>
+  </div>
+</section>
