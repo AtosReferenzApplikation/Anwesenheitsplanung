@@ -25,10 +25,10 @@ export class HomeComponent implements OnInit, OnDestroy {
     this.loadFirestoreUsers();
 
     this.updateInterval = setInterval(() => {
-      this.saveCurrentUser().then(() => {
-        this.loadFirestoreUsers();
-      });
+      this.saveCurrentUser();
     }, 5000);
+
+    this.firestore.onValueChanges().subscribe(() => this.loadFirestoreUsers());
   }
 
   ngOnDestroy(): void {
