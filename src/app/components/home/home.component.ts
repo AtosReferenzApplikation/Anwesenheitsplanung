@@ -12,6 +12,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   dates = [];
   users = [];
   availableUser = [];
+  updateInterval;
 
   constructor(private firestore: FirestoreService, private auth: AuthService) { }
 
@@ -22,10 +23,16 @@ export class HomeComponent implements OnInit, OnDestroy {
     }
 
     this.loadFirestoreUsers();
+
+    this.updateInterval = setInterval(() => {
+      this.saveAllUser();
+      this.loadFirestoreUsers();
+    }, 5000);
   }
 
   ngOnDestroy(): void {
-    this.users.forEach(user => this.firestore.setFirestoreUser(user));
+    clearInterval(this.updateInterval);
+    this.saveAllUser();
   }
 
   changeStatus(name: string, date: moment.Moment) {
@@ -37,6 +44,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   }
 
   getColor(entry) {
+    if (!moment.isMoment(entry.date)) { entry.date = moment.utc(entry.date); }
     if (entry.date.isoWeekday() === 6 || entry.date.isoWeekday() === 7) {
       return 'grey';
     }
@@ -46,16 +54,29 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   loadFirestoreUsers() {
     this.firestore.getFirestoreSnapshot().subscribe(snapshot => {
+      this.users = [];
       snapshot.forEach(doc => {
         const data = doc.data();
         if (data.calendar) {
           data.calendar.forEach(entry => {
-            entry.date = moment.utc(entry.date)
+            entry.date = moment.utc(entry.date);
           });
           this.users = [...this.users, data];
         }
       });
     });
+    this.unifyDates();
+  }
+
+  unifyDates() {
+    const today = moment.utc();
+    this.users.forEach(user => {
+      user.calendar = user.calendar.filter(entry => today.isBefore(entry.date) || today.isSame(entry.date, 'date'));
+    });
+  }
+
+  saveAllUser() {
+    return this.users.forEach(user => this.firestore.setFirestoreUser(user));
   }
 
   // onDateCheckChange(value) {
