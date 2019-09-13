@@ -25,14 +25,15 @@ export class HomeComponent implements OnInit, OnDestroy {
     this.loadFirestoreUsers();
 
     this.updateInterval = setInterval(() => {
-      this.saveAllUser();
-      this.loadFirestoreUsers();
+      this.saveCurrentUser().then(() => {
+        this.loadFirestoreUsers();
+      });
     }, 5000);
   }
 
   ngOnDestroy(): void {
     clearInterval(this.updateInterval);
-    this.saveAllUser();
+    this.saveCurrentUser();
   }
 
   changeStatus(name: string, date: moment.Moment) {
@@ -75,8 +76,9 @@ export class HomeComponent implements OnInit, OnDestroy {
     });
   }
 
-  saveAllUser() {
-    return this.users.forEach(user => this.firestore.setFirestoreUser(user));
+  saveCurrentUser() {
+    const currentuser = this.users.find(user => user.name === this.auth.user.name);
+    return this.firestore.setFirestoreUser(currentuser);
   }
 
   // onDateCheckChange(value) {
