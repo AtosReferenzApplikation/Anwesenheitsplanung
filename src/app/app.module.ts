@@ -12,13 +12,16 @@ import { HomeComponent } from './components/home/home.component';
 import { LoginComponent } from './components/login/login.component';
 import { DialogNamePromptComponent } from './components/dialog-name-prompt/dialog-name-prompt.component';
 import { environment } from 'src/environments/environment.prod';
+import { ServiceWorkerModule } from '@angular/service-worker';
+import { UpdateDialogComponent } from './components/update-dialog.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
     LoginComponent,
-    DialogNamePromptComponent
+    DialogNamePromptComponent,
+    UpdateDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -40,10 +43,15 @@ import { environment } from 'src/environments/environment.prod';
     NbUserModule,
     NbDialogModule.forRoot(),
     NbSpinnerModule,
-    NbDatepickerModule.forRoot()
+    NbDatepickerModule.forRoot(),
+    ServiceWorkerModule.register('/ngsw-worker.js', { enabled: environment.production }),
+    //ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production, registrationStrategy: 'registerImmediately' }),
   ],
   providers: [],
   bootstrap: [AppComponent],
-  entryComponents: [DialogNamePromptComponent]
+  entryComponents: [
+    DialogNamePromptComponent,
+    UpdateDialogComponent
+  ]
 })
 export class AppModule { }
