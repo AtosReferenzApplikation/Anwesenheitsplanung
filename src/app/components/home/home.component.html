@@ -12,8 +12,6 @@
         <td class="tb-cell" *ngFor="let entry of user.calendar"
           (click)="changeStatus(user.name, entry.date)"
           [ngStyle]="{'background-color': getColor(entry)}">
-          <!-- <div (click)="changeStatus(user.name, entry.date)"
-            [ngStyle]="{'background-color': getColor(entry)}"></div> -->
         </td>
       </tr>
     </table>

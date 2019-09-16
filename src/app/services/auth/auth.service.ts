@@ -26,9 +26,7 @@ export class AuthService {
   }
 
   logout() {
-    this.user = null;
-    this.router.navigate(['/login']);
-    return true;
+    this.router.navigate(['/login']).then(() => this.user = null);
   }
 
   get isAuthenticated(): boolean {

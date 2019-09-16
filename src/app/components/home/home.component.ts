@@ -63,10 +63,10 @@ export class HomeComponent implements OnInit, OnDestroy {
             entry.date = moment.utc(entry.date);
           });
           this.users = [...this.users, data];
+          this.unifyDates();
         }
       });
     });
-    this.unifyDates();
   }
 
   unifyDates() {
@@ -77,6 +77,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   }
 
   saveCurrentUser() {
+    if (this.auth.user.name.toLowerCase() === 'gast') { return; }
     const currentuser = this.users.find(user => user.name === this.auth.user.name);
     return this.firestore.setFirestoreUser(currentuser);
   }
