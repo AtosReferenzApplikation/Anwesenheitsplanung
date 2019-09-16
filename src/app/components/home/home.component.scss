@@ -1,18 +1,17 @@
 .table-wrapper {
-    overflow-x:scroll;
-    overflow-y:visible;
-    width:90%;
-    margin-left: 120px;
+  overflow-x:scroll;
+  width:90%;
+  margin-left: 120px;
 }
 
 td, th {
-    padding: 5px 20px;
-    width: 80px;
+  padding: 5px 20px;
+  width: 80px;
 }
 
 th:first-child {
-    position: fixed;
-    left: 5px
+  position: fixed;
+  left: 5px
 }
 
 .tb-top-row * {

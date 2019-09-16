@@ -13,11 +13,12 @@ export class HomeComponent implements OnInit, OnDestroy {
   users = [];
   availableUser = [];
   updateInterval;
+  calendarSize = 60;
 
   constructor(private firestore: FirestoreService, private auth: AuthService) { }
 
   ngOnInit() {
-    for (let i = 0; i <= 60; i++) {
+    for (let i = 0; i <= this.calendarSize; i++) {
       const today = moment.utc();
       this.dates = [...this.dates, today.add(i, 'd').format('DD.MM.')];
     }
@@ -73,6 +74,15 @@ export class HomeComponent implements OnInit, OnDestroy {
     const today = moment.utc();
     this.users.forEach(user => {
       user.calendar = user.calendar.filter(entry => today.isBefore(entry.date) || today.isSame(entry.date, 'date'));
+
+      // check for missing dates in calendar object
+      if (user.calendar.length < this.calendarSize) {
+        const missing = this.calendarSize - user.calendar.length;
+        for (let index = 0; index <= missing; index++) {
+          const now = moment.utc();
+          user.calendar.push({ date: now.add(user.calendar.length, 'd'), available: false });
+        }
+      }
     });
   }
 
