@@ -12,7 +12,7 @@ import { UpdateDialogComponent } from './components/update-dialog.component';
 })
 export class AppComponent {
   constructor(public router: Router, private auth: AuthService, private swUpdate: SwUpdate, private dialogService: NbDialogService) {
-    if (this.swUpdate.isEnabled || true) {
+    if (this.swUpdate.isEnabled) {
       this.swUpdate.available.subscribe(async () => {
         this.dialogService.open(UpdateDialogComponent);
       });

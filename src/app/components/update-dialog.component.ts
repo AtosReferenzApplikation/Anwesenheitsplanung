@@ -6,12 +6,12 @@ import { NbDialogRef, NbDialogService } from '@nebular/theme';
     <nb-card>
       <nb-card-header>App update!</nb-card-header>
       <nb-card-body>
-        <p>Newer version of the app is available. It's a quick refresh away!</p>
+        <p>Eine neue Version der App ist verfügbar. Lade die Seite einfach neu!</p>
       </nb-card-body>
-      <nb-card-footer>
-        <button nbButton status="danger" (click)="cancel()">Cancel</button>
+      <nb-card-footer style="display: flex;">
+        <button nbButton status="danger" (click)="cancel()" style="margin-right: auto;">Abbruch</button>
         <button nbButton status="success"
-          (click)="refresh()">Submit</button>
+          (click)="refresh()">Neu laden</button>
       </nb-card-footer>
     </nb-card>
   `

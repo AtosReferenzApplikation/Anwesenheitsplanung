@@ -1,7 +1,7 @@
 {
   "name": "Anwesenheitsplanung",
   "short_name": "Anwesenheit",
-  "theme_color": "#0095ff",
+  "theme_color": "#fafafa",
   "background_color": "#fafafa",
   "display": "standalone",
   "orientation": "portrait",
