@@ -1,21 +1,19 @@
-<div class="tb-container">
-  <div class="table-wrapper">
-    <table>
-      <tr class="tb-top-row">
-        <th class="tb-top-user">Mitarbeiter</th>
-        <th class="tb-top-cell" *ngFor="let date of dates">{{date}}</th>
-      </tr>
-      <tr class="tb-row" *ngFor="let user of users">
-        <th class="tb-user">
-          <p>{{user.name}}</p>
-        </th>
-        <td class="tb-cell" *ngFor="let entry of user.calendar"
-          (click)="changeStatus(user.name, entry.date)"
-          [ngStyle]="{'background-color': getColor(entry)}">
-        </td>
-      </tr>
-    </table>
-  </div>
+<div class="table-wrapper">
+  <table>
+    <tr class="tb-top-row">
+      <th class="tb-top-user">Mitarbeiter</th>
+      <th class="tb-top-cell" *ngFor="let date of dates">{{date}}</th>
+    </tr>
+    <tr class="tb-row" *ngFor="let user of users">
+      <th class="tb-user">
+        <p>{{user.name}}</p>
+      </th>
+      <td class="tb-cell" *ngFor="let entry of user.calendar"
+        (click)="changeStatus(user.name, entry.date)"
+        [ngStyle]="{'background-color': getColor(entry)}">
+      </td>
+    </tr>
+  </table>
 </div>
 
 <!-- <div class="date-check">

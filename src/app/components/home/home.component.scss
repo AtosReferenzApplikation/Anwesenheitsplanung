@@ -1,6 +1,7 @@
 .table-wrapper {
-  overflow-x:scroll;
-  width:90%;
+  overflow-x: scroll;
+  overflow-y: visible;
+  width: 90%;
   margin-left: 120px;
 }
 
@@ -10,8 +11,11 @@ td, th {
 }
 
 th:first-child {
-  position: fixed;
-  left: 5px
+  position: absolute;
+  left: 10px;
+  width: 110px;
+  top: auto;
+  text-align: center;
 }
 
 .tb-top-row * {
