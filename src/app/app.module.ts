@@ -14,6 +14,7 @@ import { DialogNamePromptComponent } from './components/dialog-name-prompt/dialo
 import { environment } from 'src/environments/environment.prod';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { UpdateDialogComponent } from './components/update-dialog.component';
+import { DeleteDialogComponent } from './components/delete-dialog.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { UpdateDialogComponent } from './components/update-dialog.component';
     HomeComponent,
     LoginComponent,
     DialogNamePromptComponent,
-    UpdateDialogComponent
+    UpdateDialogComponent,
+    DeleteDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -51,7 +53,8 @@ import { UpdateDialogComponent } from './components/update-dialog.component';
   bootstrap: [AppComponent],
   entryComponents: [
     DialogNamePromptComponent,
-    UpdateDialogComponent
+    UpdateDialogComponent,
+    DeleteDialogComponent
   ]
 })
 export class AppModule { }

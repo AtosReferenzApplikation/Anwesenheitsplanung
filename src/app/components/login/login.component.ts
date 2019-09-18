@@ -5,6 +5,7 @@ import { NbToastrService, NbDialogService } from '@nebular/theme';
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { FirestoreService } from 'src/app/services/firestore/firestore.service';
 import { DialogNamePromptComponent } from '../dialog-name-prompt/dialog-name-prompt.component';
+import { DeleteDialogComponent } from '../delete-dialog.component';
 
 @Component({
   selector: 'app-login',
@@ -47,7 +48,11 @@ export class LoginComponent implements OnInit {
   }
 
   deleteUser(user: any) {
-    this.firestore.deleteFirestoreUser(user).then(() => this.loadUserList());
+    this.dialogService.open(DeleteDialogComponent, {context: {name: user.name}}).onClose.subscribe(isSure => {
+      if (isSure) {
+        this.firestore.deleteFirestoreUser(user).then(() => this.loadUserList());
+      }
+    });
   }
 
   newUser(name: string) {
