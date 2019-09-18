@@ -72,9 +72,9 @@ export class HomeComponent implements OnInit, OnDestroy {
     const today = moment.utc();
     this.users.forEach(user => {
       user.calendar = user.calendar.filter(entry => today.isBefore(entry.date) || today.isSame(entry.date, 'date'));
-      console.log(this.calendarSize - user.calendar.length, user.calendar.length, this.calendarSize)
+
       // check for missing dates in calendar object
-      if (user.calendar.length < this.calendarSize) {
+      if (user.calendar.length <= this.calendarSize) {
         const missing = this.calendarSize - user.calendar.length;
         
         for (let index = 0; index <= missing; index++) {
