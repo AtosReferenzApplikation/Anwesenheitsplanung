@@ -13,12 +13,14 @@ export class HomeComponent implements OnInit, OnDestroy {
   users = [];
   availableUser = [];
   updateInterval;
+
+  // If this value is reduced, data may be permanently lost.
   calendarSize = 60;
 
   constructor(private firestore: FirestoreService, private auth: AuthService) { }
 
   ngOnInit() {
-    for (let i = 0; i <= this.calendarSize; i++) {
+    for (let i = 0; i < this.calendarSize; i++) {
       const today = moment.utc();
       this.dates = [...this.dates, today.add(i, 'd').format('DD.MM.')];
     }
@@ -81,6 +83,8 @@ export class HomeComponent implements OnInit, OnDestroy {
           const now = moment.utc();
           user.calendar.push({ date: now.add(user.calendar.length, 'd'), available: false });
         }
+      } else {
+        user.calendar = user.calendar.slice(0, this.calendarSize);
       }
     });
   }
